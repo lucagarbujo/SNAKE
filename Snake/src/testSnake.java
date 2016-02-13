@@ -44,7 +44,7 @@ public class testSnake {
 		shell.setText("SWT Application");
 		
 		Button btnNewButton = new Button(shell, SWT.NONE);
-		btnNewButton.setBounds(192, 87, 75, 25);
+		btnNewButton.setBounds(167, 95, 75, 25);
 		btnNewButton.setText("New Button");
 
 	}

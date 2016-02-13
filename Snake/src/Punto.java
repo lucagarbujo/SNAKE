@@ -5,10 +5,10 @@ public class Punto {
 	// attributi
 	private int x;
 	private int y;
-	public static int xmin=1;
-	public static int xmax=80;
-	public static int ymin=1;
-	public static int ymax=25;
+	public static int xmin=0;
+	public static int xmax=400;
+	public static int ymin=0;
+	public static int ymax=400;
 	
 	// costruttori
 

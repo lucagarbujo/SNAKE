@@ -24,7 +24,7 @@ public class testSnake {
 	private GC gc;
 	private boolean flag = false;
 	private char d = 'd';
-	private Punto b= new Punto (10,50);
+	private Punto b= new Punto (150,50);
 	
 
 	/**
@@ -40,13 +40,30 @@ public class testSnake {
 		}
 	}
 	
-	public void muovi (Punto b,char d){
-		
-
+	public void muovi (Punto b){
+		gc = new GC (canvas);
+		 
+		switch (d){
+		case 'u':
 			
+			if(b.getY()+10 < 0){
+				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+				gc.fillRectangle(b.getX(), b.getY()+10, 15, 10);
+				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+				b.setY(362);
+			}	
 			
-		
-		   gc = new GC (canvas);
+			b.setY(b.getY()-10);
+			gc.drawRectangle(b.getX(), b.getY(), 10, 10);
+			
+			//clear
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+			gc.fillRectangle(b.getX(), b.getY()+11, 15, 10);
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+			
+		break;
+		case 'd':
+			
 			if(b.getY()>362){
 				//MessageDialog.openInformation(shell, "finito", "finish");
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
@@ -54,8 +71,7 @@ public class testSnake {
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 				b.setY(-10);
 			}
-		
-		
+			
 			b.setY(b.getY()+10);
 			gc.drawRectangle(b.getX(), b.getY(), 10, 10);
 			
@@ -64,11 +80,48 @@ public class testSnake {
 			gc.fillRectangle(b.getX(), b.getY()-10, 15, 10);
 			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 			
+		break;
+		
+		case 'l':
 			
 		
-		//MessageDialog.openInformation(shell, "finito", "finish");
+			
+			if(b.getX()+10 < 0){
+				System.out.println("ciao");
+				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+				gc.fillRectangle(b.getX()+10, b.getY(), 15, 10);
+				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+				b.setX(449);
+			}
+			b.setX(b.getX()-10);
+			gc.drawRectangle(b.getX(), b.getY(), 11, 10);
+			
+			//clear
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+			gc.fillRectangle(b.getX()+11, b.getY(), 15, 11);
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		break;
 		
+		case 'r':
+			if(b.getX()>449){
+				
+				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+				gc.fillRectangle(b.getX()-10, b.getY(), 15, 10);
+				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+				b.setX(0);
+				
+			}
+			b.setX(b.getX()+10);
+			gc.drawRectangle(b.getX(), b.getY(), 10, 10);
+			
+			//clear
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+			gc.fillRectangle(b.getX()-15, b.getY(), 15, 11);
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+			
+		break;
 		
+		}
 	}
 	
 	public void setInterval(int time){
@@ -79,7 +132,7 @@ public class testSnake {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		muovi(b,d);
+		muovi(b);
 		
 	}
 	
@@ -96,7 +149,7 @@ public class testSnake {
 				//display.sleep();
 				if(flag == true){
 			
-				setInterval(200);
+				setInterval(80);
 			}
 			}
 		}
@@ -107,31 +160,32 @@ public class testSnake {
 	 */
 	protected void createContents() {
 		shell = new Shell();
+		
 		shell.setSize(505, 473);
 		shell.setText("SWT Application");
 		
 		canvas = new Canvas(shell, SWT.NONE);
 		canvas.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e){
+			public void keyPressed(KeyEvent e) {
+				
 				switch(e.keyCode){
 				case 16777217 :
 					d= 'u';
-					
-					break;
-				case :
-					
-					break;
-				case :
-					
-					break;
-				case :
-					
-					break;
+				break;
+				case 16777219:
+					d = 'l';
+				break;
+				
+				case 16777218:
+					d = 'd';
+				break;
+				case 16777220:
+					d = 'r';
 				}
-			
 			}
 		});
+		
 		
 		
 			

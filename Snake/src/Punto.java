@@ -6,9 +6,9 @@ public class Punto extends Thread{
 	// attributi
 	private int x;
 	private int y;
-	public static int xmin=0;
-	public static int xmax=400;
-	public static int ymin=0;
+	public static int xmin=-30;
+	public static int xmax=450;
+	public static int ymin=-30;
 	public static int ymax=400;
 	
 	// costruttori

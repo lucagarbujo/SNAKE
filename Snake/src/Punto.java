@@ -1,7 +1,8 @@
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.wb.swt.SWTResourceManager;
 
-
-
-public class Punto {
+public class Punto extends Thread{
 	// attributi
 	private int x;
 	private int y;
@@ -55,4 +56,7 @@ public class Punto {
      public Punto clone(){
     	 return new Punto(this);
      }
+     
+     
+    
 }

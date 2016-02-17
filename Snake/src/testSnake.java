@@ -25,6 +25,9 @@ public class testSnake {
 	private boolean flag = false;
 	private char d = 'd';
 	private Punto b= new Punto (150,50);
+	//private Punto oggetto = new Punto (300,100); salvare posizione oggetto
+	private int xOggetto;
+	private int yOggetto;
 	
 
 	/**
@@ -40,9 +43,38 @@ public class testSnake {
 		}
 	}
 	
+	public void controllaPosizione(){
+		
+		if(b.getX()+10 == xOggetto  && b.getY()+10>yOggetto && b.getY()+10<yOggetto+10){
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+			gc.fillRectangle(xOggetto, yOggetto, 10, 10);
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+			disegnaOggetto();
+		}
+		if(b.getX()+10 == xOggetto  && b.getY()>yOggetto && b.getY()<yOggetto+10){
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+			gc.fillRectangle(xOggetto, yOggetto, 10, 10);
+			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+			disegnaOggetto();
+		}
+		
+	}
+	
+	public void disegnaOggetto(){
+		
+		xOggetto = (int)(Math.random()*439);
+		yOggetto = (int) (Math.random()*352);
+		gc = new GC (canvas);
+		gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		gc.fillRectangle(xOggetto, yOggetto, 10, 10);
+		gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		
+		
+	}
+	
 	public void muovi (Punto b){
 		gc = new GC (canvas);
-		 
+	
 		switch (d){
 		case 'u':
 			
@@ -51,6 +83,7 @@ public class testSnake {
 				gc.fillRectangle(b.getX(), b.getY()+10, 15, 10);
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 				b.setY(362);
+				//controllaPosizione();
 			}	
 			
 			b.setY(b.getY()-10);
@@ -133,6 +166,7 @@ public class testSnake {
 			e.printStackTrace();
 		}
 		muovi(b);
+	
 		
 	}
 	
@@ -149,7 +183,7 @@ public class testSnake {
 				//display.sleep();
 				if(flag == true){
 			
-				setInterval(80);
+				setInterval(200);
 			}
 			}
 		}
@@ -197,6 +231,7 @@ public class testSnake {
 		btnStart.addSelectionListener(new SelectionAdapter() {
 		public void widgetSelected(SelectionEvent e) {
 			flag = true;
+			disegnaOggetto();
 			//muovi (b);
 			
 			

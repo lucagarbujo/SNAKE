@@ -23,6 +23,7 @@ public class testSnake {
 	private Canvas canvas;
 	private GC gc;
 	private boolean flag = false;
+	private boolean flag1 = true;
 	private char d = 'd';
 	private Punto b= new Punto (150,50);
 	//private Punto oggetto = new Punto (300,100); salvare posizione oggetto
@@ -45,23 +46,30 @@ public class testSnake {
 	
 	public void controllaPosizione(){
 		
-		if(b.getX()+10 == xOggetto  && b.getY()+10>yOggetto && b.getY()+10<yOggetto+10){
+		if(b.getX()+12 >=xOggetto && b.getX()+10<xOggetto+10 &&  b.getY()+10>yOggetto && b.getY()+10<yOggetto+10 ||
+		b.getX()+10 >=xOggetto && b.getX()+10<xOggetto && b.getY() == yOggetto){
+			//System.out.println("collisione");
 			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 			gc.fillRectangle(xOggetto, yOggetto, 10, 10);
 			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 			disegnaOggetto();
 		}
-		if(b.getX()+10 == xOggetto  && b.getY()>yOggetto && b.getY()<yOggetto+10){
+		if(b.getX()+10>=xOggetto && b.getX()+10<xOggetto+10 && b.getY()<yOggetto+10 && b.getY()>yOggetto){
+			System.out.println("collisione");
 			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 			gc.fillRectangle(xOggetto, yOggetto, 10, 10);
 			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 			disegnaOggetto();
 		}
+		
+		
+		
+		
 		
 	}
 	
 	public void disegnaOggetto(){
-		
+	
 		xOggetto = (int)(Math.random()*439);
 		yOggetto = (int) (Math.random()*352);
 		gc = new GC (canvas);
@@ -74,7 +82,7 @@ public class testSnake {
 	
 	public void muovi (Punto b){
 		gc = new GC (canvas);
-	
+		controllaPosizione();
 		switch (d){
 		case 'u':
 			
@@ -93,6 +101,7 @@ public class testSnake {
 			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 			gc.fillRectangle(b.getX(), b.getY()+11, 15, 10);
 			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+			//controllaPosizione();
 			
 		break;
 		case 'd':
@@ -231,12 +240,11 @@ public class testSnake {
 		btnStart.addSelectionListener(new SelectionAdapter() {
 		public void widgetSelected(SelectionEvent e) {
 			flag = true;
+			if(flag1 == true){
 			disegnaOggetto();
+			}
+			flag1= false;
 			//muovi (b);
-			
-			
-			
-			
 			}
 		
 				

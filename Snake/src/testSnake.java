@@ -46,19 +46,7 @@ public class testSnake {
 	
 	public void controllaPosizione(){
 		
-		if(b.getX()+12 >=xOggetto && b.getX()+10<xOggetto+10 &&  b.getY()+10>yOggetto && b.getY()+10<yOggetto+10 ||
-		b.getX()+10 >=xOggetto && b.getX()+10<xOggetto && b.getY() == yOggetto){
-			//System.out.println("collisione");
-			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-			gc.fillRectangle(xOggetto, yOggetto, 10, 10);
-			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-			disegnaOggetto();
-		}
-		if(b.getX()+10>=xOggetto && b.getX()+10<xOggetto+10 && b.getY()<yOggetto+10 && b.getY()>yOggetto){
-			System.out.println("collisione");
-			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-			gc.fillRectangle(xOggetto, yOggetto, 10, 10);
-			gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		if(b.getX() == xOggetto && b.getY() == yOggetto){
 			disegnaOggetto();
 		}
 		
@@ -70,15 +58,19 @@ public class testSnake {
 	
 	public void disegnaOggetto(){
 	
-		xOggetto = (int)(14+Math.random()*450);
-		yOggetto = (int) (14+Math.random()*350);
+		xOggetto = (int)(1+Math.random()*30);
+		yOggetto = (int) (1+Math.random()*24);
 		gc = new GC (canvas);
+		/*
 		if(xOggetto%15 != 0 && yOggetto%15!=0){
 			while(xOggetto%15 != 0 && yOggetto%15!=0){
 				xOggetto = (int)(14+Math.random()*450);
 				yOggetto = (int) (14+Math.random()*350);
 			}
 		}
+		*/
+		xOggetto = xOggetto*15;
+		yOggetto = yOggetto*15;
 		gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		gc.fillOval(xOggetto, yOggetto, 15, 15);
 		gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
@@ -88,16 +80,16 @@ public class testSnake {
 	
 	public void muovi (Punto b){
 		gc = new GC (canvas);
-		//controllaPosizione();
+		controllaPosizione();
 		switch (d){
 		case 'u':
 			
 			if(b.getY()<= 0){
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-				gc.fillOval(b.getX(), b.getY()+7, 15, 15);
+				gc.fillOval(b.getX(), b.getY(), 15, 15);
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
 				
-				b.setY(362);
+				b.setY(360);
 				//controllaPosizione();
 			}	
 			
@@ -121,7 +113,7 @@ public class testSnake {
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 			gc.fillOval(b.getX(), b.getY()-7, 15, 15);
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-				b.setY(-10);
+				b.setY(-15);
 			}
 			
 			
@@ -140,7 +132,7 @@ public class testSnake {
 			
 		
 			
-			if(b.getX()+10 <= 0){
+			if(b.getX()<= 0){
 				
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 				gc.fillRectangle(b.getX(), b.getY(), 15, 15);
@@ -164,7 +156,7 @@ public class testSnake {
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 				gc.fillOval(b.getX(), b.getY(), 15, 15);
 				gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-				b.setX(0);
+				b.setX(-15);
 				
 				
 			}
@@ -251,7 +243,7 @@ public class testSnake {
 		
 			
 		canvas.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-		canvas.setBounds(10, 10, 460, 360);
+		canvas.setBounds(15, 15, 450, 360);
 		
 		
 		Button btnStart = new Button(shell, SWT.NONE);

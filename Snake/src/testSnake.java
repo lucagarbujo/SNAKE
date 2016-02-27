@@ -1,6 +1,13 @@
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
@@ -29,6 +36,10 @@ public class testSnake {
 	//private Punto oggetto = new Punto (300,100); salvare posizione oggetto
 	private int xOggetto;
 	private int yOggetto;
+	private BufferedWriter scrit;
+	private BufferedWriter scrit2;
+	private BufferedReader let;
+	private BufferedReader let2;
 	
 
 	/**
@@ -175,6 +186,69 @@ public class testSnake {
 		
 		}
 	}
+	public void loadAll(){
+		//BufferedReader let;
+		
+		String riga = "";
+		String riga2 = "";
+		String dati [];
+		String dati2 [];
+		
+		
+			try {
+				let = new BufferedReader(new FileReader("xym.txt"));
+				let2 = new BufferedReader(new FileReader("xys.txt"));
+				do{
+				
+				riga = let.readLine();
+				riga2 = let2.readLine();
+				dati = riga.split(" ");
+				dati2 = riga2.split(" ");
+				xOggetto = Integer.parseInt(dati[0]) ;
+				yOggetto = Integer.parseInt(dati[1]) ;
+				
+				b.setX(Integer.parseInt(dati2[0]));
+				b.setY(Integer.parseInt(dati2[1]));
+				let.close();
+				let2.close();
+				
+				}while(riga != null);
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
+	}
+	public void saveAll(){
+		//BufferedWriter scrit;
+		String riga ="";
+		String riga2 = "";
+		
+		try {
+			scrit = new BufferedWriter(new FileWriter("xys.txt",false));
+			scrit2 = new BufferedWriter(new FileWriter("xym.txt",false));
+			riga = b.getX() + " " + b.getY();
+			riga2 = xOggetto + " " + yOggetto;
+			scrit2.write(riga2);
+			scrit.write(riga);
+			
+			//scrit.newLine();
+			scrit.close();
+			scrit2.close();
+			
+				
+				
+				
+				
+			
+			//MessageDialog.openInformation(shell, "Lettura File", "Voto : " + media);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
 	
 	public void setInterval(int time){
 		try {
@@ -185,6 +259,7 @@ public class testSnake {
 			e.printStackTrace();
 		}
 		muovi(b);
+		saveAll();
 	
 		
 	}
@@ -196,13 +271,15 @@ public class testSnake {
 		createContents();
 		shell.open();
 		shell.layout();
+		//loadAll();
 		while (!shell.isDisposed()) {
 			
 			if (!display.readAndDispatch()) {
 				//display.sleep();
+				
 				if(flag == true){
-			
-				setInterval(250);
+					
+				setInterval(150);
 			}
 			}
 		}
